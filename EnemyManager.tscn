@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://enemy_manager_scene"]
+
+[ext_resource type="Script" path="res://EnemyManager.gd" id="1_manager"]
+[ext_resource type="PackedScene" uid="uid://enemy_scene" path="res://Enemy.tscn" id="2_enemy"]
+
+[node name="EnemyManager" type="Node"]
+script = ExtResource("1_manager")
+enemy_scene = ExtResource("2_enemy")
+enemies_per_wave = 5
+spawn_delay = 3.0

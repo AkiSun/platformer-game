@@ -17,19 +17,32 @@ var current_state: GameState = GameState.PLAYING
 @onready var player_container: Node = $PlayerContainer
 @onready var enemy_container: Node = $EnemyContainer
 @onready var platforms_container: Node = $PlatformsContainer
+@onready var enemy_manager: Node = $EnemyManager
+
+var player: Node2D = null
 
 func _ready() -> void:
 	print("Platformer Game initialized!")
 	_setup_game()
+	_setup_player_group()
 
 func _setup_game() -> void:
 	# 初始化游戏容器
 	if not player_container:
-		print("Warning: PlayerContainer not found")
+		push_warning("PlayerContainer not found")
 	if not enemy_container:
-		print("Warning: EnemyContainer not found")
+		push_warning("EnemyContainer not found")
 	if not platforms_container:
-		print("Warning: PlatformsContainer not found")
+		push_warning("PlatformsContainer not found")
+
+func _setup_player_group() -> void:
+	# 将玩家添加到 "player" group
+	if player_container:
+		var players = player_container.get_children()
+		for p in players:
+			p.add_to_group("player")
+			player = p
+			print("Player added to group: ", p.name)
 
 func _process(delta: float) -> void:
 	match current_state:
@@ -43,8 +56,9 @@ func _process(delta: float) -> void:
 			pass
 
 func _update_game(delta: float) -> void:
-	# 游戏逻辑更新
-	pass
+	# 检查玩家是否还活着
+	if player and not is_instance_valid(player):
+		_on_player_died()
 
 func change_state(new_state: GameState) -> void:
 	current_state = new_state
@@ -60,11 +74,15 @@ func change_state(new_state: GameState) -> void:
 
 func _on_victory() -> void:
 	print("Victory!")
-	get_tree().paused = true
+	# 可以在这里显示胜利 UI
 
 func _on_defeat() -> void:
 	print("Defeat!")
-	get_tree().paused = true
+	# 可以在这里显示失败 UI
+
+func _on_player_died() -> void:
+	print("Player died!")
+	change_state(GameState.DEFEAT)
 
 func restart_game() -> void:
 	get_tree().paused = false
