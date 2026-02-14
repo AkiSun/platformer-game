@@ -5,3 +5,7 @@ res://Platform.tscn::8fd72fe958c443adafd959f7da78979d::1771075316::res://.godot/
 res://tileset.tres::434e0edd2d37e24e15beeaddf34004da::1771075279::res://.godot/exported/133200997/export-a3d424bb97ec7cfec11391504006e896-tileset.res
 res://TouchButton.tscn::b611f073181a14159ee1381428b62c3a::1771076211::res://.godot/exported/133200997/export-56b7e61e2b4fb8c1ff19a5ee9732de84-TouchButton.scn
 res://TouchControls.tscn::a46a92adadd476b6461c9886af195744::1771076421::res://.godot/exported/133200997/export-7b33886e3dc36bc4cea5b2675280279e-TouchControls.scn
+res://Enemy.tscn::db21b3a0e3dbebd2736bb2ae6b1449fc::1771090258::res://.godot/exported/133200997/export-c95b0eb5c5c309092e87826761594abf-Enemy.scn
+res://EnemyManager.tscn::f68b7907420b1c4455fbd7477a47744b::1771075448::res://.godot/exported/133200997/export-55890b1787e1ff3332e21a6e30ccf820-EnemyManager.scn
+res://Main.tscn::c72d84608262badddc7fedf788f20107::1771086678::res://.godot/exported/133200997/export-bcb0d2eb5949c52b6a65bfe9de3e985b-Main.scn
+res://Player.tscn::2a3fef1d160c77e6af2da1cd1df3649a::1771090289::res://.godot/exported/133200997/export-90e1ff3baa03524a506ff0f7a9d78dcf-Player.scn
