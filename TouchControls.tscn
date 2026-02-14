@@ -1,0 +1,216 @@
+[gd_scene load_steps=7 format=3 uid="uid://c touch_controls"]
+
+[ext_resource type="Script" path="res://TouchControls.gd" id="1_touchctrl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(1, 1, 1, 0.3)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pressed"]
+bg_color = Color(1, 1, 1, 0.6)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_action"]
+bg_color = Color(1, 0.4, 0.4, 0.5)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_action_pressed"]
+bg_color = Color(1, 0.4, 0.4, 0.8)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dash"]
+bg_color = Color(0.4, 0.8, 1, 0.5)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[node name="TouchControls" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_touchctrl")
+enable_touch_controls = true
+button_size = Vector2(80, 80)
+button_margin = 20.0
+left_area_offset = Vector2(30, 0)
+right_area_offset = Vector2(-30, 0)
+
+[node name="LeftPanel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 520.0
+offset_right = 220.0
+offset_bottom = 620.0
+
+[node name="BtnLeft" type="TextureButton" parent="LeftPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+offset_right = 85.0
+offset_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+action_name = "move_left"
+toggle_mode = true
+
+[node name="Label" type="Label" parent="LeftPanel/BtnLeft"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.8)
+theme_override_font_sizes/font_size = 32
+text = "◀"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnRight" type="TextureButton" parent="LeftPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+offset_left = -5.0
+offset_right = 90.0
+offset_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pressed")
+action_name = "move_right"
+toggle_mode = true
+
+[node name="Label" type="Label" parent="LeftPanel/BtnRight"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.8)
+theme_override_font_sizes/font_size = 32
+text = "▶"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightPanel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -220.0
+offset_top = 520.0
+offset_right = -20.0
+offset_bottom = 620.0
+grow_horizontal = 0
+
+[node name="BtnAttack" type="TextureButton" parent="RightPanel"]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 80.0
+offset_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_action")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_action_pressed")
+action_name = "attack"
+
+[node name="Label" type="Label" parent="RightPanel/BtnAttack"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+theme_override_font_sizes/font_size = 24
+text = "⚔"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnJump" type="TextureButton" parent="RightPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+offset_left = -5.0
+offset_right = 95.0
+offset_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_action")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_action_pressed")
+action_name = "jump"
+
+[node name="Label" type="Label" parent="RightPanel/BtnJump"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+theme_override_font_sizes/font_size = 28
+text = "⬆"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnDash" type="TextureButton" parent="RightPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 110.0
+offset_top = -110.0
+offset_right = 190.0
+offset_bottom = -10.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_dash")
+action_name = "dash"
+
+[node name="Label" type="Label" parent="RightPanel/BtnDash"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+theme_override_font_sizes/font_size = 20
+text = "dash"
+horizontal_alignment = 1
+vertical_alignment = 1
