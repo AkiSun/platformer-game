@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://enemy_scene"]
+[gd_scene load_steps=12 format=3 uid="uid://enemy_scene"]
 
 [ext_resource type="Script" path="res://Enemy.gd" id="1_enemy"]
 
@@ -9,6 +9,75 @@ height = 40.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sight"]
 size = Vector2(200, 100)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_enemy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Texture2D_enemy_idle_0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Texture2D_enemy_walk_0")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Texture2D_enemy_run_0")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Texture2D_enemy_attack_0")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Texture2D_enemy_hurt_0")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Texture2D_enemy_dead_0")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}]
+
+[sub_resource type="PlaceHolderTexture2D" id="Texture2D_enemy_idle_0"]
+size = Vector2(32, 40)
+
+[sub_resource type="PlaceHolderTexture2D" id="Texture2D_enemy_walk_0"]
+size = Vector2(32, 40)
+
+[sub_resource type="PlaceHolderTexture2D" id="Texture2D_enemy_run_0"]
+size = Vector2(32, 40)
+
+[sub_resource type="PlaceHolderTexture2D" id="Texture2D_enemy_attack_0"]
+size = Vector2(40, 40)
+
+[sub_resource type="PlaceHolderTexture2D" id="Texture2D_enemy_hurt_0"]
+size = Vector2(32, 40)
+
+[sub_resource type="PlaceHolderTexture2D" id="Texture2D_enemy_dead_0"]
+size = Vector2(40, 30)
+
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_enemy")
 
@@ -18,6 +87,8 @@ shape = SubResource("CapsuleShape2D_enemy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -20)
+sprite_frames = SubResource("SpriteFrames_enemy")
+animation = &"idle"
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -20.0

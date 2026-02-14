@@ -1,0 +1,20 @@
+# GUT 测试配置
+# 需要将此文件复制到 res://gut_config.json
+
+{
+	"tests": [
+		"res://test/test_player.gd",
+		"res://test/test_enemy.gd",
+		"res://test/test_player_enemy_interaction.gd",
+		"res://test/test_main_scene.gd"
+	],
+	"ignore_pause": false,
+	"log_print_level": 2,
+	"maximize_on_start": false,
+	"run_on_start": true,
+	"should_print_to_console": true,
+	"show_test_names": true,
+	"show_debug_line_info": false,
+	"use_colors": true,
+	"unit_test_name_prefix": "test_"
+}
