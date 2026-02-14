@@ -28,7 +28,7 @@ extends ParallaxBackground
 var screen_size: Vector2
 
 func _ready() -> void:
-	screen_size = get_viewport_rect().size
+	screen_size = get_viewport().get_visible_rect().size
 	_setup_layers()
 	print("ParallaxBackground initialized")
 
@@ -82,7 +82,7 @@ func _create_gradient_texture() -> GradientTexture2D:
 	
 	var texture = GradientTexture2D.new()
 	texture.gradient = gradient
-	texture.fill = FillMode.FILL_VERTICAL
+	texture.fill = GradientTexture2D.FILL_VERTICAL
 	texture.fill_from = Vector2(0, 0)
 	texture.fill_to = Vector2(0, 1)
 	texture.width = 512

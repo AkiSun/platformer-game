@@ -1,10 +1,31 @@
-[gd_scene load_steps=7 format=3 uid="uid://player_scene"]
+[gd_scene load_steps=12 format=3 uid="uid://player_scene"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_player"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_player"]
 radius = 16.0
 height = 48.0
+
+[sub_resource type="PlaceholderTexture2D" id="Texture2D_player_idle_0"]
+size = Vector2(32, 48)
+
+[sub_resource type="PlaceholderTexture2D" id="Texture2D_player_run_0"]
+size = Vector2(32, 48)
+
+[sub_resource type="PlaceholderTexture2D" id="Texture2D_player_jump_0"]
+size = Vector2(32, 48)
+
+[sub_resource type="PlaceholderTexture2D" id="Texture2D_player_fall_0"]
+size = Vector2(32, 48)
+
+[sub_resource type="PlaceholderTexture2D" id="Texture2D_player_dash_0"]
+size = Vector2(48, 32)
+
+[sub_resource type="PlaceholderTexture2D" id="Texture2D_player_attack_0"]
+size = Vector2(48, 48)
+
+[sub_resource type="PlaceholderTexture2D" id="Texture2D_player_climb_0"]
+size = Vector2(32, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_player"]
 animations = [{
@@ -28,7 +49,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("Texture2D_player_jump_0")
 }],
-"loop": false,
+"loop": true,
 "name": &"jump",
 "speed": 5.0
 }, {
@@ -36,7 +57,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("Texture2D_player_fall_0")
 }],
-"loop": false,
+"loop": true,
 "name": &"fall",
 "speed": 5.0
 }, {
@@ -44,7 +65,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("Texture2D_player_dash_0")
 }],
-"loop": false,
+"loop": true,
 "name": &"dash",
 "speed": 5.0
 }, {
@@ -52,48 +73,37 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("Texture2D_player_attack_0")
 }],
-"loop": false,
+"loop": true,
 "name": &"attack",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("Texture2D_player_climb_0")
+}],
+"loop": true,
+"name": &"climb",
+"speed": 5.0
 }]
-
-[sub_resource type="PlaceHolderTexture2D" id="Texture2D_player_idle_0"]
-size = Vector2(32, 48)
-
-[sub_resource type="PlaceHolderTexture2D" id="Texture2D_player_run_0"]
-size = Vector2(32, 48)
-
-[sub_resource type="PlaceHolderTexture2D" id="Texture2D_player_jump_0"]
-size = Vector2(32, 48)
-
-[sub_resource type="PlaceHolderTexture2D" id="Texture2D_player_fall_0"]
-size = Vector2(32, 48)
-
-[sub_resource type="PlaceHolderTexture2D" id="Texture2D_player_dash_0"]
-size = Vector2(48, 32)
-
-[sub_resource type="PlaceHolderTexture2D" id="Texture2D_player_attack_0"]
-size = Vector2(48, 48)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_player")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -24)
 shape = SubResource("CapsuleShape2D_player")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_player")
 animation = &"idle"
 
-[node name="HealthBar" type="ProgressBar" parent="."]
-offset_left = -30.0
-offset_top = -60.0
-offset_right = 30.0
-offset_bottom = -50.0
-max_value = 100.0
-value = 100.0
-
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -200)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -20.0
+offset_top = -35.0
+offset_right = 20.0
+offset_bottom = -30.0
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]

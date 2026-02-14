@@ -8,7 +8,7 @@ class_name TouchButton
 @export var action_name: String = ""
 
 ## 按钮是否切换状态（按下=按下，松开=松开）
-@export var toggle_mode: bool = true
+@export var is_toggle_mode: bool = true
 
 ## 按钮是否可见（调试用）
 @export var debug_visible: bool = true
@@ -24,7 +24,7 @@ func _ready() -> void:
 	
 	# 连接信号
 	pressed.connect(_on_button_pressed)
-	released.connect(_on_button_released)
+	button_up.connect(_on_button_released)
 	
 	# 确保动作存在
 	if action_name and not InputMap.has_action(action_name):
@@ -36,6 +36,6 @@ func _on_button_pressed() -> void:
 		modulate.a = pressed_opacity
 
 func _on_button_released() -> void:
-	if action_name and toggle_mode:
+	if action_name and is_toggle_mode:
 		Input.action_release(action_name)
 		modulate.a = original_opacity

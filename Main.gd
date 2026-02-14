@@ -78,8 +78,12 @@ func _update_game(delta: float) -> void:
 	
 	# 检查是否胜利（所有波次完成且没有敌人）
 	if enemy_manager:
-		var wave = enemy_manager.get("current_wave", 1)
-		var enemies_remaining = enemy_manager.get("enemies", []).size()
+		var wave = 1
+		var enemies_remaining = 0
+		if "current_wave" in enemy_manager:
+			wave = enemy_manager.current_wave
+		if "enemies" in enemy_manager and enemy_manager.enemies:
+			enemies_remaining = enemy_manager.enemies.size()
 		if wave >= total_waves and enemies_remaining == 0:
 			_on_victory()
 
