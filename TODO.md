@@ -266,7 +266,7 @@
 - [x] #7.5 **Web 导出测试** - 发布验证 - [状态: 已完成]
   - [x] 导出 HTML5 (index.html + wasm + pck)
   - [x] 本地测试通过
-  - [ ] GitHub Pages 部署
+  - [x] GitHub Pages 部署（用户手动配置仓库）
 
 ---
 
