@@ -40,4 +40,8 @@ func set_size(width: float, height: float) -> void:
 		collision_shape.shape = RectangleShape2D.new()
 		collision_shape.shape.size = Vector2(width, height)
 
+# 检查是否为单向平台
+func is_one_way_platform() -> bool:
+	return is_one_way
+
 #endif

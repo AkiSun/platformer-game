@@ -1,0 +1,106 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4kxjyq5wm6d"]
+
+[ext_resource type="Script" path="res://GameUI.gd" id="1_gameui"]
+[ext_resource type="Script" path="res://VictoryScreen.gd" id="2_victory"]
+
+[node name="GameUI" type="CanvasLayer"]
+script = ExtResource("1_gameui")
+
+[node name="HealthContainer" type="HBoxContainer" parent="."]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 220.0
+offset_bottom = 60.0
+
+[node name="HealthLabel" type="Label" parent="HealthContainer"]
+layout_mode = 2
+text = "HP:"
+
+[node name="HealthBar" type="ProgressBar" parent="HealthContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+value = 100.0
+
+[node name="ScoreContainer" type="HBoxContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 60.0
+grow_horizontal = 2
+
+[node name="ScoreLabel" type="Label" parent="ScoreContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Score: 0"
+horizontal_alignment = 1
+
+[node name="WaveContainer" type="HBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 60.0
+grow_horizontal = 0
+
+[node name="WaveLabel" type="Label" parent="WaveContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Wave: 1"
+horizontal_alignment = 2
+
+[node name="VictoryScreen" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="VictoryScreen"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VictoryScreen/VBox"]
+layout_mode = 2
+text = "VICTORY!"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="VictoryScreen/VBox"]
+layout_mode = 2
+text = "Play Again"
+
+[node name="DefeatScreen" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="DefeatScreen"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="DefeatScreen/VBox"]
+layout_mode = 2
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="DefeatScreen/VBox"]
+layout_mode = 2
+text = "Try Again"

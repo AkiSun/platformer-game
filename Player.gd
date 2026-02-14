@@ -23,6 +23,8 @@ var is_dashing: bool = false
 var can_dash: bool = true
 var is_invincible: bool = false
 var facing_right: bool = true
+var is_climbing: bool = false  # 梯子攀爬状态
+var is_on_one_way_platform: bool = false  # 是否在单向平台上
 
 ## 冲刺计时器
 var dash_timer: float = 0.0
@@ -43,6 +45,13 @@ func _ready() -> void:
 	_update_health_bar()
 
 func _physics_process(delta: float) -> void:
+	# 梯子攀爬状态不应用重力
+	if is_climbing:
+		_handle_ladder_climbing(delta)
+		move_and_slide()
+		_update_animation()
+		return
+	
 	# 应用重力
 	if not is_on_ground:
 		velocity.y += gravity * delta
@@ -50,7 +59,7 @@ func _physics_process(delta: float) -> void:
 	# 处理移动
 	_handle_movement()
 	
-	# 处理跳跃
+	# 处理跳跃（包含下平台逻辑）
 	_handle_jump()
 	
 	# 处理冲刺
@@ -64,6 +73,9 @@ func _physics_process(delta: float) -> void:
 	
 	# 更新地面状态
 	is_on_ground = is_on_floor()
+	
+	# 检测是否在单向平台上
+	_check_one_way_platform()
 	
 	# 应用移动
 	move_and_slide()
@@ -89,6 +101,13 @@ func _handle_movement() -> void:
 		velocity.x = direction * speed
 
 func _handle_jump() -> void:
+	# 下 + 跳 = 下平台（从单向平台落下）
+	if Input.is_action_pressed("move_down") and Input.is_action_just_pressed("jump"):
+		if is_on_one_way_platform:
+			_disable_one_way_collision()
+			velocity.y = 100  # 轻微向下
+			return
+	
 	if Input.is_action_just_pressed("jump") and is_on_ground:
 		velocity.y = jump_force
 		is_on_ground = false
@@ -152,7 +171,9 @@ func _update_animation() -> void:
 	
 	var anim_name := "idle"
 	
-	if is_dashing:
+	if is_climbing:
+		anim_name = "climb"
+	elif is_dashing:
 		anim_name = "dash"
 	elif velocity.x != 0 and is_on_ground:
 		anim_name = "run"
@@ -165,6 +186,54 @@ func _update_animation() -> void:
 	
 	if sprite.animation != anim_name:
 		sprite.play(anim_name)
+
+# 检测是否在单向平台上
+func _check_one_way_platform() -> void:
+	is_on_one_way_platform = false
+	
+	# 使用射线检测下方的单向平台
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsPointQueryParameters2D.new()
+	query.position = global_position + Vector2(0, collider.shape.size.y / 2 + 2)
+	query.collision_mask = 1  # 默认碰撞层
+	
+	var results = space_state.intersect_point(query, 5)
+	
+	for result in results:
+		var collider_obj = result.collider
+		if collider_obj is StaticBody2D:
+			# 检查是否是单向平台
+			if collider_obj.has_method("is_one_way_platform") and collider_obj.is_one_way_platform():
+				is_on_one_way_platform = true
+				break
+			# 检查平台节点是否有 is_one_way 属性
+			if "is_one_way" in collider_obj and collider_obj.is_one_way:
+				is_on_one_way_platform = true
+				break
+
+# 禁用单向平台碰撞（用于下平台）
+func _disable_one_way_collision() -> void:
+	# 将玩家向下移动一小段距离以穿过平台
+	global_position.y += 5
+
+# 处理梯子攀爬
+func _handle_ladder_climbing(delta: float) -> void:
+	var climb_direction := 0.0
+	
+	if Input.is_action_pressed("move_up"):
+		climb_direction = -1.0
+	elif Input.is_action_pressed("move_down"):
+		climb_direction = 1.0
+	
+	velocity.x = 0
+	velocity.y = climb_direction * speed
+	
+	# 按跳跃键从梯子跳出
+	if Input.is_action_just_pressed("jump"):
+		is_climbing = false
+		velocity.y = jump_force
+		# 稍微向上推一下，防止立即重新检测到梯子
+		global_position.y -= 5
 
 func take_damage(amount: float) -> void:
 	if is_invincible:

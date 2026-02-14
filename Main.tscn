@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://main_scene"]
+[gd_scene load_steps=9 format=3 uid="uid://main_scene"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_main"]
 [ext_resource type="PackedScene" uid="uid://player_scene" path="res://Player.tscn" id="2_player"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://enemy_scene" path="res://Enemy.tscn" id="4_enemy"]
 [ext_resource type="PackedScene" uid="uid://enemy_manager_scene" path="res://EnemyManager.tscn" id="5_manager"]
 [ext_resource type="PackedScene" uid="uid://touch_controls_scene" path="res://TouchControls.tscn" id="6_touch"]
+[ext_resource type="PackedScene" uid="uid://gameui_scene" path="res://GameUI.tscn" id="7_gameui"]
 
 [node name="Main" type="Node2D" groups=["main"]]
 script = ExtResource("1_main")
@@ -75,3 +76,5 @@ position = Vector2(200, 600)
 layer = 100
 
 [node name="TouchControls" parent="." instance=ExtResource("6_touch")]
+
+[node name="GameUI" parent="." instance=ExtResource("7_gameui")]
