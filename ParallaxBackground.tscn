@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://ParallaxBackground.gd" id="1_parallax"]
 
-[node name="ParallaxBackground" type="ParaxBackground"]
+[node name="ParallaxBackground" type="ParallaxBackground"]
 script = ExtResource("1_parallax")
 
 [node name="SkyLayer" type="ParallaxLayer" parent="."]
